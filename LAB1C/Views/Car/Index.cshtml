@@ -1,0 +1,91 @@
+﻿<!-- here goes what we receive from the controller-->
+@model IEnumerable<Car>
+@{
+    ViewData["Title"] = "Home";
+}
+<br/>
+<div class="container p-3">
+    <div class="row pt-4">
+        <!-- first 6 column in one div-->
+        <div class="col-6">
+            <h2 class="text-primary">Available cars</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Car" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>&nbsp; Add a new car</a>
+        </div>
+    </div>
+</div>
+<br/>
+<table class="table table-bordered table-striped" >
+    <thead>
+        <tr>
+            <th style="word-wrap: break-word;width:10%">
+                Brand
+            </th>
+            <th style="word-wrap: break-word; width:10%">
+                Model
+            </th>
+            <th style="word-wrap: break-word; width:10%">
+                Motor
+            </th>
+            <th style="word-wrap: break-word; width:10%">
+                Registration Date
+            </th>
+            <th style="word-wrap: break-word;width:5%">
+                Seats
+            </th>
+            <th style="word-wrap: break-word;width:10%">
+                Phone Owner
+            </th>
+            <th style="word-wrap: break-word;width:20%">
+                Email Owner
+            </th>
+            <th style="word-wrap: break-word;width:10%">
+                Price in EUR
+            </th>
+            <th width="20%">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td style="word-wrap: break-word;min-width: 10px;max-width: 50px;">
+                    @obj.Brand
+                </td>
+                <td style="word-wrap: break-word;min-width: 10px;max-width: 50px;">
+                    @obj.Model
+                </td>
+                <td style="word-wrap: break-word;min-width: 10px;max-width: 50px;">
+                    @obj.Motor
+                </td>
+                <td style="word-wrap: break-word;min-width: 10px;max-width: 50px;">
+                    @obj.RegistrationDate.ToString("dd/MM/yyyy")
+                </td>
+                <td style="word-wrap: break-word;min-width: 10px;max-width: 20px;">
+                    @obj.Seats
+                </td>
+                <td style="word-wrap: break-word;min-width: 10px;max-width: 50px;">
+                    @obj.PhoneNumberOwner
+                </td>
+                <td style="word-wrap: break-word;min-width: 10px;max-width: 50px;">
+                    @obj.EmailAddressOwner
+                </td>
+                <td style="word-wrap: break-word;min-width: 10px;max-width: 50px;">
+                    @obj.Price
+                </td>
+                <td>
+                    <div class="w-60 btn-group" role="group">
+                        <a asp-controller="Car" asp-action="Edit" asp-route-id="@obj.SerialNumber" class="btn btn-primary mx-1"><i class="bi bi-pencil-square"></i>&nbsp; Edit</a>
+                        <a asp-controller="Car" asp-action="Delete" asp-route-id="@obj.SerialNumber" class="btn btn-danger mx-1"> <i class="bi bi-trash3"></i>&nbsp; Delete</a>
+                    </div>
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
